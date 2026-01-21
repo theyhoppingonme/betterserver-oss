@@ -15,7 +15,7 @@ bool auth_create_ticket(PeerData* peer, Packet* packet)
 	{
 		PacketWrite(packet, packet_write8, 0x00);
 	}
-	PacketWrite(packet, packet_write32, 1 << 9);
+	PacketWrite(packet, packet_write32, 1 << 9); 
 	return true;
 }
 
@@ -23,6 +23,6 @@ bool auth_verify_ticket(PeerData* peer, Packet* packet)
 {
 	PacketRead(checkcum, packet, packet_read64, uint64_t);
 	PacketRead(checkcum2, packet, packet_read64, uint64_t);
-	peer->mod_tool = checkcum == 0 || checkcum2 == 0;
+	peer->mod_tool = checkcum == 0 || checkcum2 == 0; // set mod tool
 	return true;
 }
