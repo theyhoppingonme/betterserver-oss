@@ -959,3 +959,14 @@ bool server_broadcast_msg(Server *server, const char *message)
 	server_broadcast(server, &pack, true);
 	return true;
 }
+
+bool server_broadcast_msg(Server* server, uint16_t sender, const char* message)
+{
+	Packet pack;
+	PacketCreate(&pack, CLIENT_CHAT_MESSAGE);
+	PacketWrite(&pack, packet_write16, sender);
+	PacketWrite(&pack, packet_writestr, string_lower(__Str(message)));
+
+	server_broadcast(server, &pack, true);
+	return true;
+}
